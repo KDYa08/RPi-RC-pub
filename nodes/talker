@@ -1,14 +1,95 @@
-#!/usr/bin/env python
+# #!/usr/bin/env python
 
 import rospy
 from std_msgs.msg import String
+
+# from PyQt5 import QtCore, QtGui, QtWidgets, uic
+# from PyQt5.QtWidgets import *
+# import rospy
+# import sys
+
+# form_class = uic.loadUiType("handle.ui")[0]
+
+# # FL = FrontLED
+# # RL = RearLED
+# # FM = FrontMotor
+# # RM = RearMotor
+
+# class Ui_Form(QMainWindow, form_class):
+#     def __init__(self):
+#         super().__init__()
+#         self.setupUi(self)
+
+#         # FL 버튼을 눌렀을 때
+#         self.FL_button.clicked.connect(self.FL_switch)
+
+#         # RM 버튼을 눌렀을 때
+#         self.RM_button.clicked.connect(self.RM_switch)
+
+#         # 슬라이더 값이 변할 때
+#         self.Speed_Slider.valueChanged.connect(self.showValue)
+#         self.Speed_Slider.valueChanged.connect(self.front_move)
+        
+#         # 슬라이더를 놓았을 때
+#         self.Speed_Slider.sliderReleased.connect(self.front_move_stop)
+
+#         # 핸들 다이얼 값이 변할 때
+#         self.handle.valueChanged.connect(self.FM_move)
+
+#         # 핸들 다이얼 값을 놓았을 때
+#         self.handle.sliderReleased.connect(self.rear_move_stop)
+
+#     def keyPressEvent(self, e):
+#         print(e.key())
+#         self.talker(e)
+    
+#     def front_move_stop(self):
+#         pass
+    
+#     def rear_move_stop(self):
+#         pass
+
+#     def front_move(self):
+#         pass
+
+#     def FM_move(self):
+#         pass
+
+#     def showValue(self):
+#         pass
+
+#     def FL_switch(self):
+#         pass
+
+#     def RM_switch(self):
+#         pass
+
+#     def talker(self, e):
+#         pub=rospy.Publisher('chatter', String, queue_size=10)
+#         rospy.init_node('talker', anonymous=True)
+#         rate= rospy.Rate(1)
+#         while not rospy.is_shutdown():
+#             hello_str= f"{e}" #rospy.get_time()
+#             rospy.loginfo(hello_str)
+#             pub.publish(hello_str)
+#             rate.sleep()
+
+# if __name__ == '__main__':
+#     try:
+#         app = QtWidgets.QApplication(sys.argv)
+#         handle = Ui_Form()
+#         handle.show()
+#         sys.exit(app.exec_())
+        
+#     except rospy.ROSInterruptException:
+#         pass
 
 def talker():
     pub=rospy.Publisher('chatter', String, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate= rospy.Rate(1)
     while not rospy.is_shutdown():
-        hello_str= "hello world, %s" % "i`m talker" #rospy.get_time()
+        hello_str= "1" #rospy.get_time()
         rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
