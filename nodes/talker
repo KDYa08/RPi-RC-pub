@@ -12,7 +12,7 @@ Control Your TurtleBot3!
 Moving around:
    q    w    e
    a    s    d
-        x
+      space
 
 CTRL-C to quit
 """
@@ -45,6 +45,7 @@ def getKey():
 if __name__ == '__main__':
     settings = termios.tcgetattr(sys.stdin)
     try:
+        rospy.init_node('talker', anonymous=True)
         pub=rospy.Publisher('chatter', String, queue_size=10)
         status=0
         print(msg)
