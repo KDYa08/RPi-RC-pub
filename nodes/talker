@@ -3,7 +3,6 @@
 import rospy
 from geometry_msgs.msg import Twist
 import sys, tty, termios, select
-from pynput import keyboard
 from std_msgs.msg import String
 
 msg = """
@@ -53,39 +52,39 @@ if __name__ == '__main__':
             key = getKey()
             num=0
             if key == 'w' :
-                rospy.loginfo(key, num)
                 status = status + 1
                 num+=1
+                rospy.loginfo(f"{key}, {num}")
 
             elif key == 's' :
-                rospy.loginfo(key, num)
                 status = status + 1
                 num+=2
+                rospy.loginfo(f"{key}, {num}")
 
             elif key == 'a' :
-                rospy.loginfo(key, num)
                 status = status + 1
                 num+=4
+                rospy.loginfo(f"{key}, {num}")
 
             elif key == 'd' :
-                rospy.loginfo(key, num)
                 status = status + 1
                 num+=8
+                rospy.loginfo(f"{key}, {num}")
 
             elif key == 'q':
-                rospy.loginfo(key, num)
                 num+=16
                 status = status + 1
+                rospy.loginfo(f"{key}, {num}")
             
             elif key == 'e':
-                rospy.loginfo(key, num)
                 num+=32
                 status = status + 1
+                rospy.loginfo(f"{key}, {num}")
 
-            elif key == 'Space':
-                rospy.loginfo(key, num)
+            elif key == 'Space':   
                 num+=64
                 status = status + 1
+                rospy.loginfo(f"{key}, {num}")
 
             else:
                 if (key == '\x03'):
