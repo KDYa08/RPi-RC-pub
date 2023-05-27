@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="pub_sub_dialog" type="talker" name="talker" output="screen"/>
+</launch>
