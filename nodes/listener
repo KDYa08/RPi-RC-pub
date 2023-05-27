@@ -1,8 +1,29 @@
+<<<<<<< HEAD
 #listener
 
 import rospy
 import RPi.GPIO as GPIO
 from std_msgs.msg import String
+=======
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import rospy
+import RPi.GPIO as GPIO
+from std_msgs.msg import String, UInt8
+import time
+
+cnt= 0
+btn_io= 16
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(btn_io, GPIO.IN, pull_up_down= GPIO.PUD_UP)
+
+GPIO.setup(20,GPIO.OUT)#
+GPIO.output(20,0)
+
+
+>>>>>>> be99c94d98e943f2de9b7916721ffdecc1179079
 
 
 #pin setup
@@ -49,6 +70,7 @@ FL_IO=0
 FL_num=0
 #callback
 def callback(data):
+<<<<<<< HEAD
     global FL_IO
     global FL_num
     
@@ -103,6 +125,34 @@ def listener():
     rospy.spin()
 
 
+=======
+    pub_feedback= rospy.Publisher('feedback', String, queue_size= 10)
+    global cnt
+    cnt= cnt + 1
+    if cnt == 5:
+        rospy.loginfo(rospy.get_caller_id() + ' I heard %s \n', data.data)
+        cnt= 0 
+        feedback= 'count to 5, \n'
+        pub_feedback.publish(feedback)
+
+
+def led_callback(data):#
+    if data.data == 1:#
+        rospy.loginfo('led_in')
+        GPIO.output(20,1)#
+        time.sleep(1)
+    else:#
+        rospy.loginfo('led_off')
+        GPIO.output(20,0)#
+
+def listener():
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber('chatter', UInt8, led_callback)
+
+    
+    rospy.spin()
+
+>>>>>>> be99c94d98e943f2de9b7916721ffdecc1179079
 if __name__== '__main__':
     listener()
     GPIO.cleanup()
