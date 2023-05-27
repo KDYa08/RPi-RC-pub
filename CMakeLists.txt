@@ -27,6 +27,5 @@ include_directories(
 
 catkin_install_python(PROGRAMS
   nodes/listener
-  nodes/talker
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
