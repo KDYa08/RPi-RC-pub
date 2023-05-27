@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>pub_sub_dialog</name>
+  <version>1.2.5</version>
+  <description>
+  I am happy
+  </description>
+  <license>Apache 2.0</license>
+  <author email= "sonminjun0302@gmail.com">jun</author>
+  <maintainer email= "sonminjun0302@gamil.com">jun</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+
+  <build_export_depend>message_runtime</build_export_depend>
+  <exec_depend>message_runtime</exec_depend>
+  
+</package>
