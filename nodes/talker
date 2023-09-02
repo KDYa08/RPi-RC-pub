@@ -30,6 +30,7 @@ class Teleop:
 
         # getKey 대신 pynput.keyboard.Listener를 사용하여 입력값을 처리합니다.
         with Listener(
+            # 콜백함수 지정
             on_press=self.on_press,
             on_release=self.on_release
         ) as listener:
@@ -38,9 +39,8 @@ class Teleop:
     def move(self):
         global pub
         try:
-            # set의 index 사용 시 값이 없으면 에러가 발생하여
-            # string으로 변환 후 find 함수 사용
-            # w, s 값이 입력 중이 아니면 병진 속도를 0으로 설정합니다.
+            # 키를 입력받으면 num에 숫자를 추가하여 이진수로 변환후 listener에 보낸다
+            # status는 키가 100번 눌려진것을 체크하여 msg를 다시 보여준다
             keys = ''.join(self.keys)
             num=0
             if 'q' in keys:
@@ -50,7 +50,7 @@ class Teleop:
             if 'w' in keys:
                 self.status = self.status + 1
                 num+=2
-            
+
             # if 'e' in keys:
             #     num+=4
             #     self.status = self.status + 1
@@ -79,10 +79,13 @@ class Teleop:
             if self.status == 100 :
                 print(msg)
                 self.status = 0
+            # 눌린 키들과 키값들을 보여준다
             rospy.loginfo(f'{keys}, {num}')
 
+            # 키값을 이진수로 변환하여 문자열로 보낸다
             pub.publish(str(bin(num)))
 
+        # 연결 오류시 communication Fail과 오류 내용을 출력한다
         except rospy.ROSInterruptException as err:
             print(e)
             print(err)
@@ -90,6 +93,8 @@ class Teleop:
     # 키가 눌렸을 때 호출되는 콜백 함수
     def on_press(self, key):
         # to remove input buffer
+        # nt = '윈도우' posix = '우분투'
+        # 터미널에서 키값을 받기위해서 사용
         if os.name == 'nt':
             msvcrt.getch()
         else:
@@ -133,22 +138,27 @@ class Teleop:
 
         # 키 코드 값을 가져옵니다.
         key = key.char
+        # 중복제거
         # 해당 키 코드 값이 집합에 있으면 제거합니다.
         if key in self.keys:
             self.keys.remove(key)
             self.move()
 
 if __name__=="__main__":
+    # 리눅스 터미널 세팅
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
-
+    
+    # ros setup
     rospy.init_node('talker')
+
 
     pub=rospy.Publisher('chatter', String, queue_size=10)
 
+    # 클래스 호출
     Teleop()
     num = 0
-
+    
     pub.publish(str(bin(num)))
 
     # 표준 입력 버퍼 정리
