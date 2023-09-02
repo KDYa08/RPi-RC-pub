@@ -4,10 +4,15 @@ import rospy
 import RPi.GPIO as GPIO
 from std_msgs.msg import String
 
+<<<<<<< HEAD
 #전방 LED=4
 #후방 LED=6
 #전방 MOTOR=11,22,27
 #후방 MOTOR=17,9,10
+=======
+
+#pin setup
+>>>>>>> 23d00a7acd39d2282936da81fc4517f9861bd2c7
 FL=4
 RL=6
 FM=[11,22,27]
